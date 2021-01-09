@@ -1,7 +1,7 @@
 module.exports = ({
-	token: "",//полный токен бота
-	botId: ,//циферки вначале токена
-	rounds: 5,//кол-во раундов для игры
-	waitDelay: 12000,//время, которое дается на отгадывание
-	timerSteps: 3,//количество кубиков таймера (дучше не менять)
+	token: "",//Botun tokeni
+	botId: ,//Tokenin əvvəlindəki rəqəmlər
+	rounds: 5,//Raund sayı
+	waitDelay: 12000,//Tapmaq üçün verilən vaxt
+	timerSteps: 3,//Toxunma
 });
