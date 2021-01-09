@@ -1,15 +1,12 @@
-# guess-the-age-bot
-Telegram-bot for playing «guess the age» game in group chats.
+# Domino Game BOT
+Telegramda vaxtını maraqlı keçirmək üçün bot.
 
 Links
 ----
-1. [Bot itself](https://t.me/GuessTheAgeBot)
-2. [Author's channel](https://t.me/FilteredInternet)
+1. [Coder](https://t.me/FoxgOwner)
 
 Usage
 ---
-I send a photo of a person to your group chat, and your goal is to guess his age. The more accurately you answer, the less points you lose.
-
+Mən çata domino daşları yollayıram, sən isə onları tapmalısan
 Note
 ---
-`/photos` folder and `db.json` file were excluded, so don't get confused.
