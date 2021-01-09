@@ -18,18 +18,7 @@ const createGameState = chatId => {
 	return gameStates[chatId]
 }
 const getGreetMessage = isGroup => trueTrim(`
-	👋 Привет. Я — бот для игры в «угадай возраст» в групповых чатах.
-
-	📋 Правила просты: я кидаю вам фото человека, а ваша задача угадать его возраст. Чем точнее вы отвечаете, тем меньше баллов теряете.
-	${isGroup ? "" : "\n😉 Для начала, добавь меня в чат и вызови /game.\n"}
-	*Команды*
-	/game - Начать игру
-	/stop - Остановить игру
-	/top - Рейтинг игроков чата
-	/donate - Поддержать проект деньгами
-
-	Автор: @mikhailsdv
-	Мой канал: @FilteredInternet
+	Salam! Mən domino oyunu üçün yaradılmış botam!
 `)
 const getRandomPerson = () => {
 	let imagePath = "./photos"
@@ -93,17 +82,17 @@ const stopGame = (ctx, chatId) => {
 		db.update(chatId, ch => chat)
 		if (top.length > 0) {
 			ctx.replyWithMarkdown(trueTrim(`
-				*🏁 А вот и победители:*
+				*🏁 Qaliblər:*
 
-				${top.sort((a, b) => b.score - a.score).map((member, index) => `${["🏆","🎖","🏅"][index] || "🔸"} ${index + 1}. *${member.firstName}*: ${member.score} ${pluralize(member.score, "очко", "очка", "очков")}`).join("\n")}
+				${top.sort((a, b) => b.score - a.score).map((member, index) => `${["🏆","🎖","🏅"][index] || "🔸"} ${index + 1}. *${member.firstName}*: ${member.score} ${pluralize(member.score, "xal", "xal", "xal")}`).join("\n")}
 
-				❤️ Канал автора, где иногда публикуются новые прикольные боты @FilteredInternet.
-				🔄 /game - Еще разок?
+				❤️ Rəsmi kanala abunə olun: .
+				🔄 /game - Oynayaq?
 			`))
 		}
 	}
 	else {
-		ctx.reply("❌ Игра не была запущена. Вы можете запутить ее командой /start.")
+		ctx.reply("❌ Oyun başlamayıb! /start Komandası ilə oyun başlada bilmərsiniz.")
 	}
 }
 const getRoundMessage = (chatId, round, time) => {
@@ -121,8 +110,8 @@ const getRoundMessage = (chatId, round, time) => {
 	answers = answers.sort((a, b) => gameStates[chatId].answersOrder.indexOf(a.memberId) - gameStates[chatId].answersOrder.indexOf(b.memberId))
 
 	return trueTrim(`
-		*Раунд ${round + 1}/${config.rounds}*
-		Сколько, по-вашему, лет этому человеку?
+		*Raund ${round + 1}/${config.rounds}*
+		Sizcə burada neçə xal var?
 		${answers.length > 0 ? 
 			`\n${answers.map((member, index) => `${index + 1}. *${member.firstName}*: ${member.answer}`).join("\n")}\n`
 			:
@@ -184,7 +173,7 @@ const startGame = (ctx, chatId) => {
 			if (!top.every(member => member.answer === null)) {
 				ctx.replyWithMarkdown(
 					trueTrim(`
-						Человеку на этом фото *${rightAnswer} ${pluralize(rightAnswer, "год", "года", "лет")}*. Вот, кто был ближе всего:
+						Bu dominolarda vardı: *${rightAnswer} ${pluralize(rightAnswer, "daş", "daş", "daş")}*. Cavaba yaxın olanlar:
 
 						${top.sort((a, b) => b.addScore - a.addScore).map((member, index) => `${["🏆","🎖","🏅"][index] || "🔸"} ${index + 1}. *${member.firstName}*: ${plusminus(member.addScore)}`).join("\n")}
 					`),
@@ -194,7 +183,7 @@ const startGame = (ctx, chatId) => {
 				)
 			}
 			else {
-				ctx.reply("🤔 Похоже, вы не играете. Ок, завершаю игру...")
+				ctx.reply("🤔 Deyəsən oynamırsan! Oyunu bitirirəm...")
 				stopGame(ctx, chatId)
 				return
 			}
@@ -232,7 +221,7 @@ bot.command("game", (ctx) => {
 		let chat = getChat(chatId)
 		if (chat) {
 			if (chat.isPlaying) {
-				return ctx.reply("❌ У вас уже запущена игра. Вы можете ее остановить командой /stop.")
+				return ctx.reply("❌ Oyun davam edir! Bitirmək üçün /stop.")
 			}
 			else {
 				chat.isPlaying = true
@@ -246,11 +235,11 @@ bot.command("game", (ctx) => {
 		else {
 			createChat(chatId)
 		}
-		ctx.replyWithMarkdown("*Игра начинается!*")
+		ctx.replyWithMarkdown("*Oyun başlayır!*")
 		startGame(ctx, chatId)
 	}
 	else {
-		ctx.reply("❌ Эта команда доступна только для чатов.")
+		ctx.reply("❌ Bu komanda çat üçündür.")
 	}
 })
 
@@ -261,7 +250,7 @@ bot.command("stop", (ctx) => {
 		stopGame(ctx, chatId)
 	}
 	else {
-		ctx.reply("❌ Эта команда доступна только для чатов.")
+		ctx.reply("❌ Bu komanda çat üçündür.")
 	}
 })
 
@@ -297,24 +286,24 @@ bot.command("top", (ctx) => {
 			})
 			if (top.length > 0) {
 				ctx.replyWithMarkdown(trueTrim(`
-					*🔝 Лучшие игроки этого чата за все время:*
+					*🔝 Bu çat üçün TOP oyunçular:*
 
-					${top.sort((a, b) => b.score - a.score).map((member, index) => `${["🏆","🎖","🏅"][index] || "🔸"} ${index + 1}. *${member.firstName}*: ${member.score} ${pluralize(member.score, "очко", "очка", "очков")}`).join("\n")}
+					${top.sort((a, b) => b.score - a.score).map((member, index) => `${["🏆","🎖","🏅"][index] || "🔸"} ${index + 1}. *${member.firstName}*: ${member.score} ${pluralize(member.score, "xal", "xal", "xal")}`).join("\n")}
 
-					❤️ Канал автора, где иногда публикуются новые прикольные боты @FilteredInternet.
-					🔄 /game - Еще разок?
+					❤️ Rəsmi kanala abunə olun: .
+					🔄 /game - Oynayaq?
 				`))
 			}
 			else {
-				ctx.reply("❌ Вы еще не сыграли ни одной игры в этом чате.")
+				ctx.reply("❌ Siz hələ bu çatda oynamamısınız.")
 			}
 		}
 		else {
-			ctx.reply("❌ Вы еще не сыграли ни одной игры в этом чате.")
+			ctx.reply("❌ Siz hələ bu çatda oynamamısınız.")
 		}
 	}
 	else {
-		ctx.reply("❌ Эта команда доступна только для чатов.")
+		ctx.reply("❌ Bu komanda çat üçündür.")
 	}
 })
 
@@ -335,7 +324,7 @@ bot.on("message", async (ctx) => {
 			let answer = Number(message.text)
 			if (answer <= 0 || answer > 120) {
 				return ctx.reply(
-					"Ответ вне допустимого диапазона (1 - 120)",
+					"Bu diapazonda cavab qəbul olunmur (1 - 120)",
 					{
 						reply_to_message_id: ctx.message.message_id,
 					}
