@@ -80,7 +80,8 @@ rezident
 lizinq 
 lisenziya 
 makroiqtisadiyyat 
-mikroiqtisadiyyat mükəlləfiyyət 
+mikroiqtisadiyyat
+mükəlləfiyyət 
 müəssisə 
 müavinət 
 podrat 
@@ -626,7 +627,6 @@ Kahin
 Katolik
 Keşiş
 Kəbin
-
 Ağacişləmə
 Aktuari
 Aktyor
@@ -687,7 +687,6 @@ Kommunikasiya
 Konfrans
 Konsistensiya
 Prezentasiya
-
 dərbənd
 nardaran
 çatdirmaq
